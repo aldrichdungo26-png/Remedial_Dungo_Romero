@@ -1,23 +1,23 @@
 @extends('layouts.app')
-
 @section('content')
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">{{ __('Employee Management') }}</h1>
+                <div class="col-sm-12">
+                    <h1 class="m-0">{{ __('Employee List') }}</h1>
+                    @if (session('status'))
+                      <div class="alert alert-success">{{session('status')}}</div>
+                  @endif
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-
     <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
             <a href="#" class="btn btn-info">Add New Employee</a> <br> <br>
-            
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
