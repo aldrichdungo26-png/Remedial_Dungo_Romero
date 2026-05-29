@@ -10,8 +10,8 @@ class employeecontroller extends Controller
 {
     public function index()
     {   
-        $employee = employee::all();
-        return view('employee.index', compact('employee'));
+        $employees = employee::all();
+        return view('employee.index', compact('employees'));
     }
 
 
@@ -23,32 +23,32 @@ class employeecontroller extends Controller
 
     public function store(Request $request)
     {
-        $employee = new employee;
-        $employee->name = $request->name;
-        $employee->email = $request->email;
-        $employee->phone = $request->phone;
-        $employee->save();
+        $employees = new employee;
+        $employees->name = $request->name;
+        $employees->email = $request->email;
+        $employees->phone = $request->phone;
+        $employees->save();
         return redirect()->route('employee.index');
     }
 
     public function edit( int $id)
     {
-        $employee = employee::find($id);
-        return view('employee.edit', compact('employee'));
+        $employees = employee::find($id);
+        return view('employee.edit', compact('employees'));
     }
 
     public function update(Request $request, int $id) {
-        $employee = employee::find($id);
-        $employee->name = $request->name;
-        $employee->email = $request->email;
-        $employee->phone = $request->phone;
-        $employee->save();
+        $employees = employee::find($id);
+        $employees->name = $request->name;
+        $employees->email = $request->email;
+        $employees->phone = $request->phone;
+        $employees->save();
         return redirect()->route('employee.index');
     }
 
     public function destroy(int $id){
-        $employee = employee::find($id);
-        $employee->delete();
+        $employees = employee::find($id);
+        $employees->delete();
         return redirect()->route('employee.index');
     }
 }
