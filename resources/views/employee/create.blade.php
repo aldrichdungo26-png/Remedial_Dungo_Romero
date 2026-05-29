@@ -1,64 +1,54 @@
+@extends('layouts.app')
 @section('content')
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">{{ __('Employee Management') }}</h1>
+                <div class="col-sm-12">
+                    <h1 class="m-0">{{ __('Employee List') }}</h1>
+                    @if (session('status'))
+                      <div class="alert alert-success">{{session('status')}}</div>
+                  @endif
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-
     <!-- Main content -->
     <div class="content">
-      <div class="container-fluid">
-        <div class="row">
-          @if (session('status'))
-              <div class="alert alert-success">{{session('status')}}</div>
-          @endif
-            <div class="col-6 m-auto">
-              <div class="card card-secondary">
-                <div class="card-header">
-                  <h3 class="card-title">Add new employee</h3>
-                </div>
-                <form>
-                    <div class="row card-body col-12">
-                        <div class="form-group col-6">
-                          <label for="exampleInputPassword1">Lastname</label>
-                          <input type="text" class="form-control g-2" id="lname" name="lname" placeholder="Enter your Lastname" require>
-                        </div>
-                        <div class="form-group col-6">
-                          <label for="exampleInputPassword1">Middlename</label>
-                          <input type="text" class="form-control g-2" id="midname" name="mname" placeholder="Enter your Middlename" require>
-                        </div> 
-                        <div class="form-group col-12">
-                          <label for="exampleInputPassword1">FirstName</label>
-                          <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter your First Name">
-                        </div>
-                        <div class="form-group col-12">
-                          <label for="exampleInputPassword1">Address</label>
-                          <input type="text" class="form-control" id="address" name="address" placeholder="House No. Street Name, Brgy, City">
-                        </div>
-                        <div class="form-group col-6">
-                          <label for="exampleInputPassword1">Date of Birth</label>
-                          <input type="date" class="form-control" id="dob" name="dob" placeholder="YYYY-MM-DD"> <br>
-                        </div>
-                        <div class="form-group col-6">
-                          <label for="exampleInputPassword1">Contact No</label>
-                          <input type="text" class="form-control" id="contact" name="contact" placeholder="Enter your Contact No">
-                        </div>
-                        <button type="submit" class="btn btn-success col-6 m-auto">Submit Student Record</button>
-                      </div>
-                    </div>
-                </form>
-                <!-- /.card-body -->
-              </div>
-            </div>
-          </div>
+        <div class="container-fluid">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Middle Name</th>
+                        <th>Address</th>
+                        <th>Date of Birth</th>
+                        <th>Contact No</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($employees as $employee)
+                    <tr>
+                        <td>{{ $employee->id }}</td>
+                        <td>{{ $employee->fname }}</td>
+                        <td>{{ $employee->lname }}</td>
+                        <td>{{ $employee->midname }}</td>
+                        <td>{{ $employee->address }}</td>
+                        <td>{{ $employee->dob }}</td>
+                        <td>{{ $employee->contact }}</td>
+                        <td>
+                            <a href="{{ route('employee.edit', $employee->id) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ route('employee.delete', $employee->id) }}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div><!-- /.container-fluid -->
-      </div>
     </div>
-  </div>
+    <!-- /.content -->
 @endsection
